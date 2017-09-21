@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.louis.mapper.CsvpartbaseMapper">
+    <resultMap id="BaseResultMap" type="com.louis.entity.Csvpartbase">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="mac" property="mac" jdbcType="VARCHAR"/>
+        <result column="ip" property="ip" jdbcType="VARCHAR"/>
+        <result column="upIp" property="upip" jdbcType="VARCHAR"/>
+        <result column="upName" property="upname" jdbcType="VARCHAR"/>
+        <result column="upIndex" property="upindex" jdbcType="VARCHAR"/>
+        <result column="modifyTime" property="modifytime" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, mac, ip, upIp, upName, upIndex, modifyTime
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.louis.entity.CsvpartbaseExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from csvpartbase
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from csvpartbase
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from csvpartbase
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.louis.entity.CsvpartbaseExample">
+        delete from csvpartbase
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.louis.entity.Csvpartbase">
+    insert into csvpartbase (id, mac, ip, 
+      upIp, upName, upIndex, 
+      modifyTime)
+    values (#{id,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{upip,jdbcType=VARCHAR}, #{upname,jdbcType=VARCHAR}, #{upindex,jdbcType=VARCHAR}, 
+      #{modifytime,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.louis.entity.Csvpartbase">
+        insert into csvpartbase
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="mac != null">
+                mac,
+            </if>
+            <if test="ip != null">
+                ip,
+            </if>
+            <if test="upip != null">
+                upIp,
+            </if>
+            <if test="upname != null">
+                upName,
+            </if>
+            <if test="upindex != null">
+                upIndex,
+            </if>
+            <if test="modifytime != null">
+                modifyTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="mac != null">
+                #{mac,jdbcType=VARCHAR},
+            </if>
+            <if test="ip != null">
+                #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="upip != null">
+                #{upip,jdbcType=VARCHAR},
+            </if>
+            <if test="upname != null">
+                #{upname,jdbcType=VARCHAR},
+            </if>
+            <if test="upindex != null">
+                #{upindex,jdbcType=VARCHAR},
+            </if>
+            <if test="modifytime != null">
+                #{modifytime,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.louis.entity.CsvpartbaseExample" resultType="java.lang.Integer">
+        select count(*) from csvpartbase
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update csvpartbase
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mac != null">
+                mac = #{record.mac,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ip != null">
+                ip = #{record.ip,jdbcType=VARCHAR},
+            </if>
+            <if test="record.upip != null">
+                upIp = #{record.upip,jdbcType=VARCHAR},
+            </if>
+            <if test="record.upname != null">
+                upName = #{record.upname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.upindex != null">
+                upIndex = #{record.upindex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.modifytime != null">
+                modifyTime = #{record.modifytime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update csvpartbase
+        set id = #{record.id,jdbcType=VARCHAR},
+        mac = #{record.mac,jdbcType=VARCHAR},
+        ip = #{record.ip,jdbcType=VARCHAR},
+        upIp = #{record.upip,jdbcType=VARCHAR},
+        upName = #{record.upname,jdbcType=VARCHAR},
+        upIndex = #{record.upindex,jdbcType=VARCHAR},
+        modifyTime = #{record.modifytime,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.louis.entity.Csvpartbase">
+        update csvpartbase
+        <set>
+            <if test="mac != null">
+                mac = #{mac,jdbcType=VARCHAR},
+            </if>
+            <if test="ip != null">
+                ip = #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="upip != null">
+                upIp = #{upip,jdbcType=VARCHAR},
+            </if>
+            <if test="upname != null">
+                upName = #{upname,jdbcType=VARCHAR},
+            </if>
+            <if test="upindex != null">
+                upIndex = #{upindex,jdbcType=VARCHAR},
+            </if>
+            <if test="modifytime != null">
+                modifyTime = #{modifytime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.louis.entity.Csvpartbase">
+    update csvpartbase
+    set mac = #{mac,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      upIp = #{upip,jdbcType=VARCHAR},
+      upName = #{upname,jdbcType=VARCHAR},
+      upIndex = #{upindex,jdbcType=VARCHAR},
+      modifyTime = #{modifytime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <!--查询所有信息-->
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from csvpartbase
+    </select>
+</mapper>

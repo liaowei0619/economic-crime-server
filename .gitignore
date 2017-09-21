@@ -1,0 +1,12 @@
+#idea setting
+.idea
+*.iml
+*.class
+*.war
+target
+# eclipse setting
+.settings/
+.project
+/bin/
+.classpath
+.target/
